@@ -1,6 +1,6 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class Battlefield {
@@ -38,7 +38,36 @@ public class Battlefield {
 
 
     void placeDestroyers() {
+        ArrayList<HashMap<String, Integer>> cord = new ArrayList<>(Ships.Battleship.amount);
+        Random random = new Random();
 
+        HashMap<String, Integer> point = new HashMap<>(1);
+        point.put("x", random.nextInt(9));
+        point.put("y", random.nextInt(9));
+        cord.add(point);
+
+        Direction direction = calculateDirection(cord);
+
+        int xPoint = point.get("x");
+        int yPoint = point.get("y");
+
+        battleMap[xPoint][yPoint] = FOURTH;
+
+
+
+        System.out.println(point);
+        System.out.println(direction);
+    }
+
+    private Direction calculateDirection(ArrayList<HashMap<String, Integer>> point) {
+        Direction direction;
+        int xPoint = point.get(0).get("x");
+        int yPoint = point.get(0).get("y");
+
+        Direction[] values = Direction.values();
+        direction = values[(new Random().nextInt(values.length))];
+
+        return direction;
     }
 
     void drawField() {
